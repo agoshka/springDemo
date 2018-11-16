@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Lesson {
+
+    
     public enum Status {
         Planned,
         Finished
@@ -69,6 +71,10 @@ public class Lesson {
     @Override
     public String toString() {
         return  String.format("course %d %s", id, formatter.format(date), status.name());
+    }
+    
+    boolean isFinished() {
+        return status == Status.Finished;
     }
     
 }

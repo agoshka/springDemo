@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -31,6 +32,11 @@ public class Course implements Serializable {
     private Status state = Status.Starting;
     @ManyToMany(fetch = FetchType.EAGER)
     Set<User> users;
+    
+    @OneToMany(mappedBy = "course")
+    List<Lesson> lessons;
+    @OneToMany(mappedBy = "course")
+    List<Payment> payments;
 
     public int getId() {
         return id;
@@ -67,12 +73,39 @@ public class Course implements Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
     
     public void addUser(User user){
         if (users == null) {
             users = new HashSet<>();
         }
         users.add(user);
+    }
+    
+    public void addLesson(Lesson lesson){
+        if (lessons == null) {
+            lessons = new ArrayList<>();
+        }
+        lessons.add(lesson);
+        if (lesson.isFinished()) {
+            lessonCount -= 1;
+        }
+    }
+    
+    public void addPayment(Payment payment){
+        if (payments == null) {
+            payments = new ArrayList<>();
+        }
+        payments.add(payment);
+        lessonCount += payment.getCount();
+        
     }
     
     
