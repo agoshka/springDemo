@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>User Info:</div>
+        {{#user}}
+            <div>
+                <b>{{id}}</b>
+                <b>{{name}}</b>
+            </div>
+            <hr>
+            <div>User's courses:</div>
+            {{#courses}}
+            <table border="1">
+                <tr>
+                    <th>Course</th>
+                    <th>Remaining lessons</th>
+                    <th>Current state</th>
+                </tr>
+            
+                
+                {{#courses}}
+                    <tr>
+                        <th><a href="../courses/{{id}}">{{name}}</a></th>
+                        <th><b>{{lessonCount}}</b></th>
+                        <th><b>{{state}}</b></th>
+                    </tr>
+                {{/courses}}
+            
+            </table>
+            {{/courses}}
+
+            {{^courses}}
+                <i>No courses </i>
+            {{/courses}}
+
+        {{/user}}
+        
+        <hr>
+        <a href="../users">goto to user list</a>
+    </body>
+</html>
+
