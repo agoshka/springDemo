@@ -14,15 +14,12 @@
             </div>
             <hr>
             <div>User's courses:</div>
-            {{#courses}}
             <table border="1">
                 <tr>
                     <th>Course</th>
                     <th>Remaining lessons</th>
                     <th>Current state</th>
                 </tr>
-            
-                
                 {{#courses}}
                     <tr>
                         <th><a href="../courses/{{id}}">{{name}}</a></th>
@@ -30,13 +27,16 @@
                         <th><b>{{state}}</b></th>
                     </tr>
                 {{/courses}}
-            
+                {{^courses}}
+                    <tr>
+                        <th><i>No courses </i></th>
+                        <th>-</th>
+                        <th>-</th>
+                    </tr>
+                {{/courses}}
             </table>
-            {{/courses}}
 
-            {{^courses}}
-                <i>No courses </i>
-            {{/courses}}
+            
 
         {{/user}}
         

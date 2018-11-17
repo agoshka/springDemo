@@ -10,7 +10,7 @@ import org.agoshka.demo.data.service.DataGenerator;
  * @author go
  */
 @Component
-public class InitDataBean implements InitializingBean{
+public class InitDataBean implements InitializingBean {
 
     @Autowired
     DataGenerator serv;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.agoshka.demo.data.service.DataGenerator;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -22,7 +23,7 @@ public class HelloWorldController {
     @Autowired
     private DemoBean bean;
          
-    @RequestMapping(value="/hello", method=RequestMethod.GET)
+    @GetMapping(value="/")
     public String getHelloWorld(@RequestParam(name = "who", required = false) String who, Map<String, Object> model) {
          if (who != null) {
             bean.setName(who);
