@@ -1,7 +1,7 @@
 package org.agoshka.demo.data.service;
 
 import java.util.List;
-import org.agoshka.demo.data.entity.Course;
+import org.agoshka.demo.data.domain.Course;
 
 /**
  *

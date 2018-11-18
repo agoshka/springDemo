@@ -1,6 +1,6 @@
 package org.agoshka.demo.data.repo;
 
-import org.agoshka.demo.data.entity.Payment;
+import org.agoshka.demo.data.domain.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

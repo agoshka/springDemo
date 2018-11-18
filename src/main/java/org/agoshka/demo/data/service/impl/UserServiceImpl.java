@@ -1,10 +1,12 @@
 package org.agoshka.demo.data.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.agoshka.demo.data.DemoDataException;
-import org.agoshka.demo.data.entity.User;
+import org.agoshka.demo.data.domain.Role;
+import org.agoshka.demo.data.domain.User;
 import org.agoshka.demo.data.repo.UserRepository;
 import org.agoshka.demo.data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,38 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public User addNewUser(String name) {
-        User user = userRepo.findByUserName(name);
-        if (user != null)
-            throw new DemoDataException("User");
-        user = new User(name);
+        User user = new User(name);
+        return addNewUser(user);
+    }
+    
+    @Override
+    public User addNewUser(User user) {
+        if (user.getName().trim().isEmpty()) {
+            throw new DemoDataException("Username is empty");
+        }
+        User userFromDb = userRepo.findByUserName(user.getName());
+        if (userFromDb != null) {
+            throw new DemoDataException("User is exists");
+        }
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
         return user;
+        
     }
+    
+    public User updateUser(int id, String password, boolean isActive, boolean isAdmin) {
+        User u = userRepo.findById(id).orElse(null);
+        if ( u == null) {
+            throw new DemoDataException ("User is not exist");
+        }
+        u.setActive(isActive);
+        u.setPassword(password);
+        u.getRoles().add( isAdmin ? Role.ADMIN : Role.USER);
+        userRepo.save(u);
+        return u;
+    }
+    
 
     @Override
     public void removeUser(int id) {
@@ -43,7 +70,4 @@ public class UserServiceImpl implements UserService {
         Optional<User> u = userRepo.findById(id);
         return u.orElse(null);
     }
-    
-    
-   
 }

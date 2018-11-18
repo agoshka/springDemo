@@ -6,6 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        </form>
         <h2>Course list:</h2>
         
             <table border="1">
@@ -18,7 +22,7 @@
                 
                 {{#courses}}
                     <tr>
-                        <th><a href="/{{id}}">{{name}}</a></th>
+                        <th><a href="/courses/{{id}}">{{name}}</a></th>
                         <th><b>{{lessonCount}}</b></th>
                         <th><b>{{state}}</b></th>
                     </tr>
@@ -31,6 +35,7 @@
             <form method="post">
                 <input type="text" name="name" placeholder="Course name"/>
                 <input type="text" name="userName" placeholder="User name"/>
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                 <button type="submit">Add</button>
             </form>
         </div>

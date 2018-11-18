@@ -6,6 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        </form>
         <h2>Course Info:</h2>
         {{#course}}
             <div>
@@ -33,6 +37,7 @@
             <div>
                 <form method="post">
                     <input type="text" name="userName" placeholder="Add new user"/>
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                     <button type="submit">Add user</button>
                 </form>
             </div>

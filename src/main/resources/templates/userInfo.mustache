@@ -6,6 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        </form>
         <div>User Info:</div>
         {{#user}}
             <div>
@@ -38,9 +42,17 @@
 
             
 
-        {{/user}}
         
-        <hr>
+            <hr>
+            <h2>Edit user</h2>
+            <form method="post">
+                    <input type="password" name="password" placeholder="Password"/>
+                    <!--<label>is Active</label><input type="checkbox" name="isActive" value="{active}}" placeholder="Active user"/>-->
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                    <button type="submit">Save User</button>
+                </form>
+            <hr>
+        {{/user}}
         <a href="../users">goto to user list</a>
     </body>
 </html>

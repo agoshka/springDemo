@@ -3,7 +3,7 @@ package org.agoshka.demo.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.agoshka.demo.data.entity.User;
+import org.agoshka.demo.data.domain.User;
 import org.agoshka.demo.data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,23 +30,38 @@ public class UsersController {
         model.put("users", users);
         return "users";
     }
+    
+    @PostMapping("/users")
+    public String addUser(@RequestParam String name,@RequestParam  String password, Map<String,Object> model) {
+        User u = new User(name);
+        u.setPassword(password);
+        u.setActive(true);
+        userService.addNewUser(u);
+        return getUsers(model);
+    }
+    
     @GetMapping("/users/{id}")
     public String getUser(@PathVariable int id, Map<String, Object> model) {
         User u = userService.getUser(id);
         model.put("user", u);
         return "userInfo";
-        
     }
-    @PostMapping("/users")
-    public String addUser(@RequestParam String name, Map<String,Object> model) {
-        userService.addNewUser(name);
-        return getUsers(model);
+    @PostMapping("/users/{id}")
+    public String setUser(@PathVariable int id, 
+        User u,     Map<String, Object> model) 
+    {
+        User usr = userService.updateUser(id, u.getPassword(), true, false);
+        model.put("user", usr);
+        return "userInfo";
     }
-    
+
     @DeleteMapping("/users/{id}")
     public String removeUser(@PathVariable int id, Map<String,Object> model) {
         userService.removeUser(id);
         return getUser(0, model);
     }
  
+
+    
+    
    }

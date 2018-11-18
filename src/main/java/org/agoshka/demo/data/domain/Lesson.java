@@ -1,4 +1,4 @@
-package org.agoshka.demo.data.entity;
+package org.agoshka.demo.data.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

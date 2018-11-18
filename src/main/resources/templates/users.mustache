@@ -6,6 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        </form>
         <h2>User list:</h2>
         <ul>
         {{#users}}
@@ -22,7 +26,9 @@
         <div>
             <form method="post">
                 <input type="text" name="name" placeholder="User name"/>
-                <button type="submit">Add</button>
+                <input type="text" name="password" placeholder="Password"/>
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <button type="submit">Add User</button>
             </form>
         </div>
     </body>

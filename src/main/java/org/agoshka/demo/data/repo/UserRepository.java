@@ -1,6 +1,6 @@
 package org.agoshka.demo.data.repo;
 
-import org.agoshka.demo.data.entity.User;
+import org.agoshka.demo.data.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
