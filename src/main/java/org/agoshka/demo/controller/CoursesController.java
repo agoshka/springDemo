@@ -1,5 +1,6 @@
 package org.agoshka.demo.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,8 +45,9 @@ public class CoursesController {
         return getCourse(id,model);
     }
     @PostMapping
-    public String addCourse(@RequestParam String name, @RequestParam String userName, Map<String,Object> model) {
-        courseService.addNewCourse(name, userName);
+    public String addCourse(@RequestParam String name, Principal principal, Map<String,Object> model) {
+        
+        courseService.addNewCourse(name, principal.getName());
         return getCourses(model);
     }
     

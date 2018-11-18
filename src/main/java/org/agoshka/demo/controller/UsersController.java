@@ -6,6 +6,7 @@ import java.util.Map;
 import org.agoshka.demo.data.domain.User;
 import org.agoshka.demo.data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ public class UsersController {
     private UserService userService;
     
     @GetMapping(value="/users")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getUsers(Map<String, Object> model) {
         Map<String,String> repo = new HashMap<>();
         List<User> users = userService.getAllUsers();
